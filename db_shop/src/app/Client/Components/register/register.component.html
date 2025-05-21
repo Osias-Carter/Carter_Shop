@@ -1,0 +1,86 @@
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <div class="register-container">
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Register at <span>LuxeShop (partie client) </span></h1>
+            <p class="tagline">Join our Community</p>
+        </div>
+        <div class="hero-overlay"></div>
+    </header>
+
+    <main class="main-content">
+        <form class="register-form" (ngSubmit)="submit()">
+            <div class="form-group">
+                <label for="firstname">
+                    <i class="fas fa-user"></i> Firstname
+                </label>
+                <input 
+                    type="text" 
+                    id="firstname" 
+                    name="firstname" 
+                    [(ngModel)]="formData.firstname" 
+                    required
+                    placeholder="Enter your firstname"
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="lastname">
+                    <i class="fas fa-user-tag"></i> Lastname
+                </label>
+                <input 
+                    type="text" 
+                    id="lastname" 
+                    name="lastname" 
+                    [(ngModel)]="formData.lastname" 
+                    required
+                    placeholder="Enter your lastname"
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="email">
+                    <i class="fas fa-envelope"></i> Email
+                </label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    [(ngModel)]="formData.email" 
+                    required
+                    placeholder="your@email.com"
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="password">
+                    <i class="fas fa-lock"></i> Password
+                </label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    [(ngModel)]="formData.password" 
+                    required
+                    placeholder="••••••••"
+                    minlength="8"
+                />
+                <small class="hint">at least 5 characters</small>
+            </div>
+
+            <button mat-raised-button color="primary" class="btn primary" type="submit">
+                <i class="fas fa-user-plus"></i> Register
+            </button>
+            
+
+            <div class="form-footer">
+                <p>Already have an account ? <a (click)="goTo('user_login')">Login</a></p>
+            </div>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2023 LuxeShop. all rights reserved.</p>
+    </footer>
+    </div>

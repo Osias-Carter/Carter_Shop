@@ -1,0 +1,231 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<div class="admin-dashboard">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">LuxeShop Admin</div>
+    <nav class="admin-nav">
+      <a href="#" [class.active]="activeTab === 'categories'" (click)="setActiveTab('categories', $event)">
+        <i class="fas fa-tags"></i> Catégories
+      </a>
+      <a href="#" [class.active]="activeTab === 'products'" (click)="setActiveTab('products', $event)">
+        <i class="fas fa-box-open"></i> Produits
+      </a>
+      <a href="#" [class.active]="activeTab === 'stats'" (click)="setActiveTab('stats', $event)">
+        <i class="fas fa-chart-bar"></i> Statistiques
+      </a>
+      <a href="#" [class.active]="activeTab === 'account'" (click)="setActiveTab('account', $event)">
+        <i class="fas fa-user"></i> Compte
+      </a>
+    </nav>
+    <button class="logout-btn" (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i> Déconnexion
+    </button>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Categories Tab -->
+    <section class="tab-content" *ngIf="activeTab === 'categories'">
+      <div class="header">
+        <h2>Gestion des Catégories</h2>
+      </div>
+      <div class="form-section">
+        <h3>{{ editingCategory ? 'Modifier' : 'Ajouter' }} une Catégorie</h3>
+        <form [formGroup]="categoryForm" (ngSubmit)="handleCategorySubmit()">
+          <div class="form-group">
+            <label for="category-name">Nom *</label>
+            <input id="category-name" formControlName="cat_name" type="text" required />
+            <div *ngIf="categoryForm.get('cat_name')?.invalid && categoryForm.get('cat_name')?.touched" class="error">
+              Le nom est requis.
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" (click)="cancelEditCategory()" *ngIf="editingCategory">Annuler</button>
+            <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid">
+              {{ editingCategory ? 'Mettre à jour' : 'Créer' }}
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of categories">
+              <td>{{ category.id }}</td>
+              <td>{{ category.cat_name }}</td>
+              <td class="actions">
+                <button class="btn-icon edit" (click)="startEditCategory(category)">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn-icon delete" (click)="confirmDeleteCategory(category.id)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Products Tab -->
+    <section class="tab-content" *ngIf="activeTab === 'products'">
+      <div class="header">
+        <h2>Gestion des Produits</h2>
+      </div>
+      <div class="form-section">
+        <h3>{{ editingProduct ? 'Modifier' : 'Ajouter' }} un Produit</h3>
+        <form [formGroup]="productForm" (ngSubmit)="handleProductSubmit()">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="product-name">Nom *</label>
+              <input id="product-name" formControlName="pro_name" type="text" required />
+              <div *ngIf="productForm.get('pro_name')?.invalid && productForm.get('pro_name')?.touched" class="error">
+                Le nom est requis.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="category-id">Catégorie *</label>
+              <select id="category-id" formControlName="categories_id" required>
+                <option value="">Sélectionner une catégorie</option>
+                <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.cat_name }}</option>
+              </select>
+              <div *ngIf="productForm.get('categories_id')?.invalid && productForm.get('categories_id')?.touched" class="error">
+                La catégorie est requise.
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="price">Prix *</label>
+              <input id="price" formControlName="pro_price" type="number" step="0.01" required />
+              <div *ngIf="productForm.get('pro_price')?.invalid && productForm.get('pro_price')?.touched" class="error">
+                Le prix est requis et doit être positif.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" formControlName="pro_desc" rows="4"></textarea>
+            <div *ngIf="productForm.get('pro_desc')?.invalid && productForm.get('pro_desc')?.touched" class="error">
+              La description est réquise.
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" (click)="cancelEditProduct()" *ngIf="editingProduct">Annuler</button>
+            <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">
+              {{ editingProduct ? 'Mettre à jour' : 'Créer' }}
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Catégorie</th>
+              <th>Prix</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products">
+              <td>{{ product.id }}</td>
+              <td>{{ product.pro_name }}</td>
+              <td>{{ getCategoryName(product.categories_id) }}</td>
+              <td>{{ product.pro_price | currency:'FCFA' }}</td>
+              <td>{{ product.pro_desc || '-' }}</td>
+              <td class="actions">
+                <button class="btn-icon edit" (click)="startEditProduct(product)">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn-icon delete" (click)="confirmDeleteProduct(product.id)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Stats Tab -->
+    <section class="tab-content" *ngIf="activeTab === 'stats'">
+      <div class="header">
+        <h2>Statistiques</h2>
+      </div>
+      <div class="stats-section">
+        <h3>Aperçu</h3>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h4>Catégories</h4>
+            <p>{{ getStats().totalCategories }}</p>
+          </div>
+          <div class="stat-card">
+            <h4>Produits</h4>
+            <p>{{ getStats().totalProducts }}</p>
+          </div>
+          <div class="stat-card">
+            <h4>Valeur Totale Stock</h4>
+            <p>{{ getStats().totalStock | currency:'EUR' }}</p>
+          </div>
+        </div>
+        <p class="note">En développement...</p>
+      </div>
+    </section>
+
+    <!-- Account Tab -->
+    <section class="tab-content" *ngIf="activeTab === 'account'">
+      <div class="header">
+        <h2>Mon Compte</h2>
+      </div>
+      <div class="account-section">
+        <form [formGroup]="accountForm" (ngSubmit)="handleAccountSubmit()">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstname">Prénom *</label>
+              <input id="firstname" formControlName="firstname" type="text" required />
+              <div *ngIf="accountForm.get('firstname')?.invalid && accountForm.get('firstname')?.touched" class="error">
+                Le prénom est requis.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="lastname">Nom *</label>
+              <input id="lastname" formControlName="lastname" type="text" required />
+              <div *ngIf="accountForm.get('lastname')?.invalid && accountForm.get('lastname')?.touched" class="error">
+                Le nom est requis.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input id="email" formControlName="email" type="email" required />
+            <div *ngIf="accountForm.get('email')?.invalid && accountForm.get('email')?.touched" class="error">
+              L'email est requis et doit être valide.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe (laisser vide pour ne pas modifier)</label>
+            <input id="password" formControlName="password" type="password" placeholder="••••••••" />
+            <div *ngIf="accountForm.get('password')?.invalid && accountForm.get('password')?.touched" class="error">
+              Le mot de passe doit avoir au moins 6 caractères.
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" [disabled]="accountForm.invalid">Mettre à jour</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+</div>

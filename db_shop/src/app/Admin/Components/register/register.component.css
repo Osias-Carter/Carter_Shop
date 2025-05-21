@@ -1,0 +1,356 @@
+/* Styles de base hérités */
+.register-container {
+    display: flex;
+    flex-direction: column;
+    min-block-size: 100vh;
+}
+
+/* Hero section */
+.hero {
+    position: relative;
+    block-size: 40vh;
+    background: url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-block-end: 2rem;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-inline-size: 800px;
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-block-end: 1rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero h1 span {
+    color: #ff6b6b;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    margin-block-end: 2rem;
+    font-weight: 300;
+}
+
+/* Formulaire */
+.register-form {
+    max-inline-size: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-block-end: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-block-end: 0.5rem;
+    font-weight: 600;
+    color: #343a40;
+}
+
+.form-group label i {
+    margin-inline-end: 10px;
+    color: #4e9af1;
+}
+
+.form-group input {
+    inline-size: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #4e9af1;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(78, 154, 241, 0.2);
+}
+
+.hint {
+    display: block;
+    margin-block-start: 0.3rem;
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Bouton */
+.btn.primary {
+    inline-size: 100%;
+    padding: 12px;
+    background-color: #4e9af1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn.primary:hover {
+    background-color: #3a86d9;
+    transform: translateY(-2px);
+}
+
+/* Pied de formulaire */
+.form-footer {
+    margin-block-start: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.form-footer a {
+    color: #4e9af1;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.site-footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #343a40;
+    color: white;
+    margin-block-start: auto;
+}
+
+/* Responsive */
+@media (max-inline-size: 768px) {
+    .hero {
+        block-size: 30vh;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .register-form {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+}
+/* zefzgethryuykiluo */
+/* Hérite des styles de base de la page d'accueil */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    min-block-size: 100vh;
+}
+
+/* Hero section (identique à l'accueil mais avec un titre différent) */
+.hero {
+    position: relative;
+    block-size: 40vh;
+    background: url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-block-end: 2rem;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-inline-size: 800px;
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-block-end: 1rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero h1 span {
+    color: #ff6b6b;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    margin-block-end: 2rem;
+    font-weight: 300;
+}
+
+/* Formulaire */
+.login-form {
+    max-inline-size: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-block-end: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-block-end: 0.5rem;
+    font-weight: 600;
+    color: #343a40;
+}
+
+.form-group label i {
+    margin-inline-end: 10px;
+    color: #4e9af1;
+}
+
+.form-group input {
+    inline-size: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #4e9af1;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(78, 154, 241, 0.2);
+}
+
+/* Bouton */
+.btn.primary {
+    inline-size: 100%;
+    padding: 12px;
+    background-color: #4e9af1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn.primary:hover {
+    background-color: #3a86d9;
+    transform: translateY(-2px);
+}
+
+/* Pied de formulaire */
+.form-footer {
+    margin-block-start: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.form-footer a {
+    color: #4e9af1;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+
+.forgot-password {
+    display: block;
+    margin-block-start: 0.5rem;
+}
+
+/* Footer */
+.site-footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #343a40;
+    color: white;
+    margin-block-start: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero {
+        block-size: 30vh;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .login-form {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+}
+/* Ajoutez ces styles à votre fichier CSS existant */
+
+.success-snackbar {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .error-snackbar {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  /* Style pour le bouton pendant le chargement */
+  .btn[disabled] {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  /* Animation de chargement */
+  .loading-spinner {
+    display: inline-block;
+    inline-size: 20px;
+    block-size: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-block-start-color: white;
+    animation: spin 1s ease-in-out infinite;
+    margin-inline-end: 8px;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
